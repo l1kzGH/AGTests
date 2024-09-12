@@ -1,0 +1,6 @@
+.idea
+/NeuModel/save/modelname.pt
+/NeuModel/datasets/
+/NeuModel/src/agnn/**pycache**
+/NeuModel/src/agnn/other/tete.py
+/NeuModel/src/agnn/other/oldapi.py

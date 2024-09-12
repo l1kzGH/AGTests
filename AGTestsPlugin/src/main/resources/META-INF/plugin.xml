@@ -1,0 +1,70 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+
+    <idea-version since-build="232" until-build="241.*"/>
+
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>com.likz.AGTests</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>AutoGenTests</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="myemail@gmail.com" url="https://www.yourcompany.com">SSTU</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description> <![CDATA[
+        <h2>AutoGenTests</h2>
+        <p>Open up new development horizons with our AI AutoGenTests plugin!</p>
+        <p>This powerful tool, integrated into your IDE, uses advanced artificial intelligence technology to automatically
+        generate code.</p>
+        <p>Save time and effort by allowing AI to create functions, classes, and even entire modules based on your
+        requirements.</p>
+        <p>With our plugin, you can focus on the creative aspects of programming, leaving routine tasks to artificial
+        intelligence.</p>
+        <p>Smart, intuitive and adaptive, it will become an indispensable assistant for both novice developers and
+        experienced professionals.</p>
+        <p>Code auto-generation has never been so simple and efficient!</p>
+        ]]>
+    </description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+
+    </extensions>
+    <actions>
+        <action id="com.likz.agtests.ClassTGen"
+                class="com.likz.agtests.ClassTGen"
+                text="Generate Tests"
+                description="Generating tests on click"
+                icon="com.intellij.icons.ExpUiIcons.Diff.MagicResolveToolbar">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
+        </action>
+        <action id="com.likz.agtests.MethodTGen"
+                class="com.likz.agtests.MethodTGen"
+                text="Generate Test"
+                icon="com.intellij.icons.ExpUiIcons.Diff.MagicResolveToolbar">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+    </actions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow
+                id="AG Terminal" anchor="bottom" factoryClass="com.likz.agtests.TerminalAG" canCloseContents="true"/>
+        <applicationConfigurable
+                parentId="tools" displayName="AutoGen Settings" instance="com.likz.agtests.config.ConfigAG"
+                id="agsettings"/>
+
+        <editorFactoryListener implementation="com.likz.agtests.gutter.GIVEnter"/>
+        <psi.treeChangeListener implementation="com.likz.agtests.gutter.GIVChanging"/>
+    </extensions>
+</idea-plugin>
